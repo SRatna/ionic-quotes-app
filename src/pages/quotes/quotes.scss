@@ -1,3 +1,15 @@
 page-quotes {
-
+  .author{
+    color: #8c8c8c;
+    text-transform: uppercase;
+    text-align: right;
+    margin: 0;
+    padding: 0;
+    &:before {
+      content: '- ';
+    }
+  }
+  .card-content {
+    padding-bottom: 0;
+  }
 }
