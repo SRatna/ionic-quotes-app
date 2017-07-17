@@ -11,8 +11,8 @@ export class QuotePage {
   text: string;
   constructor(private viewController: ViewController, private navParams: NavParams) {}
 
-  onCloseModal() {
-    this.viewController.dismiss();
+  onCloseModal(remove = false) {
+    this.viewController.dismiss(remove);
   }
 
   ionViewDidLoad() {

@@ -18,7 +18,13 @@ export class FavoritesPage {
   }
 
   onViewQuote(quote: Quote) {
-    this.modalController.create(QuotePage, quote).present();
+    let modal = this.modalController.create(QuotePage, quote);
+    modal.present();
+    modal.onDidDismiss(remove => {
+      if (remove) {
+        this.quotesService.removeQuoteFromFavorites(quote);
+      }
+    })
   }
 
 }
