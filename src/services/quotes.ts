@@ -1,7 +1,7 @@
-import {Quote} from "../data/quote.interface";
 /**
  * Created by osho on 7/17/17.
  */
+import {Quote} from "../data/quote.interface";
 export class QuotesService {
   private favQuotes: Quote[] = [];
 
@@ -19,5 +19,12 @@ export class QuotesService {
   getFavoriteQuotes() {
     // return this.favQuotes.slice();
     return this.favQuotes;
+  }
+
+  isQuoteFavorite(quote: Quote) {
+    let found = this.favQuotes.find((myQuote: Quote) => {
+      return myQuote.id == quote.id;
+    });
+    return !!found;
   }
 }

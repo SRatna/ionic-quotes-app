@@ -9,7 +9,7 @@
 <ion-content padding>
   <ion-card *ngFor="let group of quoteGroup.quotes; let i = index">
     <ion-card-header text-center>
-      #{{i}}
+      #{{i+1}}
     </ion-card-header>
     <ion-card-content class="card-content">
       <p>{{group.text}}</p>
@@ -17,7 +17,14 @@
     </ion-card-content>
     <ion-row>
       <ion-col text-right>
-        <button ion-button clear small (click)="onAddToFavorite(group)">Favorite</button>
+        <button ion-button clear small
+                (click)="onAddToFavorites(group)"
+                *ngIf="!isQuoteFavorite(group)">
+          Favorite</button>
+        <button ion-button clear small color="danger"
+                (click)="onRemoveFromFavorites(group)"
+                *ngIf="isQuoteFavorite(group)">
+          UnFavorite</button>
       </ion-col>
     </ion-row>
   </ion-card>

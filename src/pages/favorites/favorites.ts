@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {QuotesService} from "../../services/quotes";
 import {Quote} from "../../data/quote.interface";
-import {ModalController} from "ionic-angular";
+import {AlertController, ModalController} from "ionic-angular";
 import {QuotePage} from "../quote/quote";
 
 @Component({
@@ -10,7 +10,8 @@ import {QuotePage} from "../quote/quote";
 })
 export class FavoritesPage {
   favQuotes: Quote[];
-  constructor(private quotesService: QuotesService, private modalController: ModalController) {
+  constructor(private quotesService: QuotesService, private alertController: AlertController,
+              private modalController: ModalController) {
   }
 
   ionViewWillEnter() {
@@ -25,6 +26,29 @@ export class FavoritesPage {
         this.quotesService.removeQuoteFromFavorites(quote);
       }
     })
+  }
+
+  onRemoveFromFavorites(quote: Quote) {
+    this.alertController.create({
+      title: 'Remove Quote',
+      subTitle: 'Are you sure?',
+      message: 'Do you really want to remove this quote from your favorite quotes list?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.quotesService.removeQuoteFromFavorites(quote)
+          }
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            //console.log('no')
+          }
+        }
+      ]
+    }).present();
   }
 
 }

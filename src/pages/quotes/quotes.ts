@@ -18,7 +18,7 @@ export class QuotesPage implements OnInit{
     this.quoteGroup = this.navParams.data;
   }
 
-  onAddToFavorite(quote: Quote) {
+  onAddToFavorites(quote: Quote) {
     this.alertController.create({
       title: 'Add Quote',
       subTitle: 'Are you sure?',
@@ -41,10 +41,36 @@ export class QuotesPage implements OnInit{
     }).present();
   }
 
+  onRemoveFromFavorites(quote: Quote) {
+    this.alertController.create({
+      title: 'Remove Quote',
+      subTitle: 'Are you sure?',
+      message: 'Do you really want to remove this quote from your favorite quotes list?',
+      buttons: [
+        {
+          text: 'Yes',
+          handler: () => {
+            this.quotesService.removeQuoteFromFavorites(quote)
+          }
+        },
+        {
+          text: 'No',
+          role: 'cancel',
+          handler: () => {
+            //console.log('no')
+          }
+        }
+      ]
+    }).present();
+  }
+
+  isQuoteFavorite(quote: Quote) {
+    return this.quotesService.isQuoteFavorite(quote);
+  }
+
   // ionViewDidLoad() {
   //   this.quoteGroup = this.navParams.data;
   //   //if we use this method then we need to add ? operator after quoteGroup in template
   //   //as template is drawn before this method
   // }
-
 }
